@@ -1,46 +1,38 @@
+// Code goes here
 var app = angular.module("myApp", []);
 
-app.controller("MainController", function ($scope) {
-  $scope.users = [
-    { id: 1, name: "Người dùng 1", email: "user1@example.com" },
-    { id: 2, name: "Người dùng 2", email: "user2@example.com" },
-    { id: 3, name: "Người dùng 3", email: "user3@example.com" },
-  ];
+app.controller("myCtrl", function($scope){
+console.log("My controller.....");
 
-  $scope.modalTitle = "Thêm mới người dùng";
-  $scope.formData = {};
+    $scope.users = [
+    {name: "Thi", email: "dangkimthi@gmail.com", fullname: "Dang Kim Thi"}, 
+    {name: "ThiDK", email: "thidk@gmail.com", fullname: "Thi DK"},
+    {name: "CodeLean", email: "code lean@gmail.com", fullname: "Code Lean"}
+    ];
 
-  $scope.openModal = function (mode, user) {
-    if (mode === "add") {
-      $scope.modalTitle = "Thêm mới người dùng";
-      $scope.formData = {};
-    } else if (mode === "edit") {
-      $scope.modalTitle = "Chỉnh sửa người dùng";
-      $scope.formData = angular.copy(user);
-    }
+    $scope.addUser= function(){
+    $scope.users.push($scope.newUser);
+    $scope.newUser = {};
+    $scope.message = "New User Added successfully";
+    };
 
-    $("#myModal").modal("show");
-  };
+    $scope.selectUser = function(user){
+    console.log(user);
+    $scope.clickedUser = user;
+    };
 
-  $scope.submitUser = function () {
-    if ($scope.formData.id) {
-      var index = $scope.users.findIndex((u) => u.id === $scope.formData.id);
-      if (index !== -1) {
-        $scope.users[index] = angular.copy($scope.formData);
-      }
-    } else {
-      $scope.formData.id = $scope.users.length + 1;
-      $scope.users.push(angular.copy($scope.formData));
-    }
+    $scope.editUser = function(){
+    $scope.message = "User Edited successfully";
+    };
 
-    $("#myModal").modal("hide");
-    $scope.formData = {};
-  };
+    $scope.deleteUser = function() {
+        $scope.users.splice($scope.users.indexOf($scope.clickedUser), 1);
+        $scope.message = "User Deleted successfully";
+        $scope.clickedUser = null; // Reset clickedUser after deletion
+    };
+    
 
-  $scope.deleteUser = function (user) {
-    var index = $scope.users.indexOf(user);
-    if (index !== -1) {
-      $scope.users.splice(index, 1);
-    }
-  };
+    $scope.clearMessage = function(){
+    $scope.message = "";
+    };
 });
