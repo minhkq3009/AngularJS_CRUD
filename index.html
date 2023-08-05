@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-report="user in users">
+                    <tr ng-repeat="user in users">
                         <td>{{$index + 1}}.</td>
                         <td>{{user.name}}</td>
                         <td>{{user.email}}</td>
@@ -62,7 +62,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2">User Name</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" ng-control="newUser.name">
+                                <input type="text" class="form-control" ng-model="newUser.name">
                             </div>
                         </div>
                         <div class="form-group">
@@ -115,7 +115,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2">Full Name</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" ng-model="clickedUser.name">
+                                <input type="text" class="form-control" ng-model="clickedUser.fullname">
                             </div>
                         </div>
                         <div class="form-group">
